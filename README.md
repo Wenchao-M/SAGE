@@ -90,14 +90,23 @@ pip install -r requirements.txt
 
 #### Evaluate on the real capture demo
 
-- We provide an app to capture real motion sequences in Quest2. You can download it from here. We also open source the
-core code of it at [get6Dof.cs](real_demo%2Fget6Dof.cs).
+- **Before continuing, please remember to open the developer mode of Quest.**
+- We provide an app to capture real motion sequences in Quest2. You can find it at realdemo/UnityProject/First3D/SAGENet.apk. You 
+ can download and install it on Quest2 device. This is what the program looks like when it runs:
+
+<img src="real_demo/UnityProject/First3D/ui.jpg" width="500">
+
 - This toy app starts recording data as soon as it is opened and
 stops recording when it is exited. 
-- After recording, you can find the data at Android/data/First3D/*****.txt
+- After recording, you can find the data at Android/data/SAGENet/*****.txt
 
-If you want to use our model in real demo, please download the weight from
-[here](https://drive.google.com/file/d/1ewCFmpnSY9R_RWdBmuAv8ByyYRmSf-Wj/view?usp=sharing).
+<img src="real_demo/UnityProject/First3D/file_save_path.png" width="500">
+
+- We also open source the code of this toy app at real_demo/UnityProject/First3D
+- After getting the data ****.txt, you can use the [process_quan.py](real_demo%2Fprocess_quan.py) to transform data into 
+a coordinate system that the model can process.
+- If you want to use our model in real demo, please download the weight from
+[here](https://drive.google.com/file/d/1u5taAQ_Og9Wck-8eUhiiQi1s983y3Lws/view?usp=sharing).
 
 #### Evaluate on the dataset
 

@@ -122,7 +122,7 @@ def quaternion_to_rotation_matrix(q):
     return r.view(-1, 3, 3)
 
 
-file_dir = "/remote-home/fenghan/cvpr2024/SAGENet/livedemo/data0325"
+file_dir = "/data0601"  # directory to your data
 file_names = os.listdir(file_dir)
 for file_name in file_names:
     if file_name.endswith(".pt"):
@@ -142,7 +142,7 @@ for file_name in file_names:
     rhand_raw_matrix = quaternion_to_rotation_matrix(rhand_ori_np)
     full_raw_matrix = torch.cat([head_raw_matrix[:, None], lhand_raw_matrix[:, None], rhand_raw_matrix[:, None]],
                                 dim=1)  # (seq, 3, 3, 3)
-    full_cal_matrix = full_raw_matrix.matmul(Tpose.transpose(-1, -2)[None])  # coordinate transform
+    full_cal_matrix = full_raw_matrix.matmul(Tpose.transpose(-1, -2)[None])  # coodinate transfer
     full_cal_matrix_homo = torch.eye(4)[None, None].repeat(full_cal_matrix.shape[0], 3, 1, 1).to(float)
     full_cal_matrix_homo[..., :3, :3] = full_cal_matrix
     full_cal_matrix_homo[..., :3, 3:] = torch.cat(  # (seq, 3, 3, 1)
@@ -182,5 +182,5 @@ for file_name in file_names:
     sparse_all = torch.cat((head_all, lhand_all, rhand_all), dim=-1)
 
     print(sparse_all.shape)
-    torch.save(sparse_all[100:], file_name + "_new0505.pt")
-    print(f"saving {file_name}_new0505.pt")
+    torch.save(sparse_all[100:], file_name.split('.')[0] + ".pt")
+    print(f"saving {file_name.split('.')[0] + ".pt"}")
