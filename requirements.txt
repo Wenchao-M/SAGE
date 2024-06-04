@@ -1,0 +1,10 @@
+yacs
+tqdm
+einops
+ipdb
+diffusers
+timm
+accelerate
+opencv-python
+trimesh
+pyrender

@@ -1,0 +1,91 @@
+# base
+CUDA: True
+DEVICE: 0
+SEED: 10
+
+# dataset
+DATASET_PATH: "./dataset/"
+PROTOCOL: "2_full_dataset"  # ['1_small_dataset', '2_full_dataset', 'real', 'randomsplit_0']
+SUPPORT_DIR: "body_models"
+UPPER_VQ_DIR: "outputs/body_vqvae_upper_FULL"
+LOWER_VQ_DIR: "outputs/body_vqvae_lower_FULL"
+DECODER_DIR: "outputs/decoder_FULL"
+REFINER_DIR: "outputs/refiner_FULL"
+
+SPARSE_DIM: 54
+MOTION_NFEAT: 132
+INPUT_MOTION_LENGTH: 20
+FULL_MOTION_LENGTH: 500
+OVERLAPPING_TEST: False
+MASK_TRAINING: True
+MASK_RATIO: 0.5
+LAST_FRAME: True
+LOSS_FUNC: "l1"
+
+
+# Training related config
+BATCH_SIZE: 1  # batch size during training
+NUM_PER_BATCH: 512 # batch size during inference
+NUM_WORKERS: 8
+EPOCH: 200
+LR: 8e-5
+WEIGHT_DECAY: 1e-4
+MILESTONES: [ 15 ]
+GAMMA: 0.2
+FPS: 60
+VIS: False
+SAVE_GT: False
+
+VQVAE:
+  n_layers: [6, 6]
+  hid_dim: 256
+  heads: 4
+  dropout: 0.
+  n_codebook: 8
+  n_e: 512
+  e_dim: 384
+  beta: 1.0
+
+DECODER:
+  n_layers: 4
+  hid_dim: 256
+  heads: 4
+  e_dim: 384
+  loss_weight:
+    root: 0.02
+    other_joints: 1.0
+    body_fk: 5.0
+    upper: 0.1
+    lower: 0.5
+
+REFINER:
+  n_layers: 2
+  hidden_dim: 512
+  loss_weight:
+    recons: 0.01
+    vel_1: 60
+    vel_2: 20
+    fk_loss: 0.01
+    hand_align: 0.01
+    jitter: 0.03
+
+DIFFUSION:
+  mask_traing: True
+  mask_num: 2
+  layers_upper: 12
+  layers_lower: 12
+  init_noise_sigma: 0.01
+  scheduler:
+    target: diffusers.DDIMScheduler
+    num_inference_timesteps: 5
+    eta: 0.0
+    params:
+      num_train_timesteps: 1000
+      beta_start: 0.00085
+      beta_end: 0.012
+      beta_schedule: 'squaredcos_cap_v2' # Optional: ['linear', 'scaled_linear', 'squaredcos_cap_v2']
+      prediction_type: 'sample'
+      clip_sample: false # clip sample to -1~1
+      # below are for ddim
+      set_alpha_to_one: false
+      steps_offset: 0

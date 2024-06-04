@@ -1,0 +1,44 @@
+# Base
+CUDA: True
+SEED: 10
+SUPPORT_DIR: "body_models"
+NUM_WORKERS: 8
+
+# Dataset
+DATASET_PATH: "./dataset/"
+#DATASET_PATH: "./dataset/AMASS_all/"
+PROTOCOL: "1_small_dataset"
+TRAIN_DATASET_REPEAT_TIMES: 500
+INPUT_MOTION_LENGTH: 20
+FPS: 60
+MOTION_NFEAT: 132
+SPARSE_DIM: 54
+
+# Training
+BATCH_SIZE: 512
+LR: 1e-4
+EPOCH: 40
+WEIGHT_DECAY: 1e-4
+part: "upper"
+MILESTONES: [30, 50]
+MASK_RATIO: 0.5
+ROOTLOSS: True
+LOSS:
+  alpha_codebook: 0.25
+  fk_loss: 5
+  hand_align_loss: 5
+
+
+# Testing
+OVERLAPPING_TEST: False
+NUM_PER_BATCH: 1024
+
+VQVAE:
+  n_layers: [4, 4]
+  hid_dim: 256
+  heads: 4
+  dropout: 0.
+  n_codebook: 8
+  n_e: 512
+  e_dim: 384
+  beta: 1.0

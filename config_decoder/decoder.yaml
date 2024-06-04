@@ -1,0 +1,82 @@
+# base
+CUDA: True
+DEVICE: 0
+SEED: 10
+
+# dataset
+DATASET_PATH: "./dataset/"
+PROTOCOL: "1_small_dataset"  # ['1_small_dataset', '2_full_dataset', 'real', 'randomsplit_0']
+SUPPORT_DIR: "body_models"
+UPPER_VQ_DIR: "outputs/upper_vqvae"
+LOWER_VQ_DIR: "outputs/lower_vqvae"
+UPPER_DIF_DIR: "outputs/first"
+LOWER_DIF_DIR: "outputs/second"
+
+SPARSE_DIM: 54
+MOTION_NFEAT: 132
+INPUT_MOTION_LENGTH: 20
+TRAIN_DATASET_REPEAT_TIMES: 500
+OVERLAPPING_TEST: False
+MASK_TRAINING: True
+MASK_RATIO: 0.5
+LAST_FRAME: True
+LOSS_FUNC: "l1"
+
+
+# Training related config
+BATCH_SIZE: 300  # batch size during training
+NUM_PER_BATCH: 1024  # batch size during inference
+NUM_WORKERS: 8
+EPOCH: 200
+LR_1: 1e-4
+LR_2: 8e-5
+WEIGHT_DECAY: 1e-4
+EPOCH_DECODER: 6
+EPOCH_ALL: 12
+
+GAMMA: 0.2
+FPS: 60
+VIS: False
+SAVE_GT: False
+
+VQVAE:
+  n_layers: [4, 4]
+  hid_dim: 256
+  heads: 4
+  dropout: 0.
+  n_codebook: 8
+  n_e: 512
+  e_dim: 384
+  beta: 1.0
+
+DECODER:
+  n_layers: 4
+  hid_dim: 256
+  heads: 4
+  e_dim: 384
+  loss_weight:
+    root: 0.02
+    other_joints: 1.0
+    body_fk: 5.0
+
+
+DIFFUSION:
+  mask_traing: True
+  mask_num: 2
+  layers_upper: 12
+  layers_lower: 12
+  init_noise_sigma: 0.01
+  scheduler:
+    target: diffusers.DDIMScheduler
+    num_inference_timesteps: 5
+    eta: 0.0
+    params:
+      num_train_timesteps: 1000
+      beta_start: 0.00085
+      beta_end: 0.012
+      beta_schedule: 'squaredcos_cap_v2' # Optional: ['linear', 'scaled_linear', 'squaredcos_cap_v2']
+      prediction_type: 'sample'
+      clip_sample: false # clip sample to -1~1
+      #for ddim
+      set_alpha_to_one: false
+      steps_offset: 0
