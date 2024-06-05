@@ -107,7 +107,20 @@ stops recording when it is exited.
 a coordinate system that the model can process.
 - If you want to use our model in real demo, please download the weight from
 [here](https://drive.google.com/file/d/1u5taAQ_Og9Wck-8eUhiiQi1s983y3Lws/view?usp=sharing).
-- After getting the results, you can visulize it in Blender using SMPL_blender_addon. (todo: release this part of code)
+- After getting the results, you can visulize it in Blender using [smpl_animation_blender.py](real_demo%2Fsmpl_animation_blender.py).
+  - Notice that before using it, you must agree the license of SMPL and SMPLX.
+  - To use [smpl_animation_blender.py](real_demo%2Fsmpl_animation_blender.py), you need to download SMPL Blender addon from [here](https://smpl.is.tue.mpg.de/download.php)
+  - If you want the SMPL to have texture, please download the texture file from [here](https://github.com/Meshcapade/SMPL_texture_samples).
+  - You project should look like this:
+  - ```
+    ├─ data/
+    ├─── smpl-model-20200803.blend
+    ├─── smpl_joint_regressor_male.npz
+    ├─── smpl_joint_regressor_female.npz
+    ├─── f_01_alb.002.png
+    ├─── m_01_alb.002.png
+    └─ smpl_animation_blender.py
+    ```
 
 #### Evaluate on the dataset
 
@@ -185,7 +198,7 @@ CUDA_VISIBLE_DEVICES=0 python train_refiner.py --cfg config_decoder/refiner.yaml
 
 #### For implementation details, please contact:
 · wmm5390@psu.edu
-
+· whuerfff@whu.edu.cn
 
 
 ## Acknowledgements
