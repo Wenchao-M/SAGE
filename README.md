@@ -107,6 +107,7 @@ stops recording when it is exited.
 a coordinate system that the model can process.
 - If you want to use our model in real demo, please download the weight from
 [here](https://drive.google.com/file/d/1u5taAQ_Og9Wck-8eUhiiQi1s983y3Lws/view?usp=sharing).
+- After getting the results, you can visulize it in Blender using SMPL_blender_addon. (todo: release this part of code)
 
 #### Evaluate on the dataset
 
@@ -184,8 +185,6 @@ CUDA_VISIBLE_DEVICES=0 python train_refiner.py --cfg config_decoder/refiner.yaml
 
 #### For implementation details, please contact:
 · wmm5390@psu.edu
-
-· whuerfff@whu.edu.cn
 
 
 
