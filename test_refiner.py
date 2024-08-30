@@ -71,7 +71,7 @@ def overlapping_test_simplify(args, data, upper_model, model, vq_model_upper, vq
 def test_process(args=None, log_path=None, cur_epoch=None):
     if args is None:
         cfg_args = get_args()
-        cfg_args.cfg = 'config_decoder/refiner_full_rand0.yaml'
+        # cfg_args.cfg = 'config_decoder/refiner_full_rand0.yaml'
         args = merge_file(cfg_args)
         name = cfg_args.cfg.split('/')[-1].split('.')[0]  # output directory
         args.SAVE_DIR = os.path.join("outputs", name)

@@ -21,6 +21,7 @@ SMPL_JOINT_NAMES = {
     14: 'R_Collar',     17: 'R_Shoulder',       19: 'R_Elbow',            21: 'R_Wrist',         23: 'R_Hand',
 }
 smpl_joints = 21  # len(SMPL_JOINT_NAMES)
+proj_dir = 'D:/BlenderProj/SAGE'  # todo Change this dir
 # End SMPL globals
 
 
@@ -81,9 +82,8 @@ def updata_location():
     j_regressor_male = None
 
     if j_regressor_male is None:
-        path = 'C:/BlenderProj/smpl_proj'
         regressor_path = os.path.join(
-            path, "data", "smpl_joint_regressor_male.npz")
+            proj_dir, "data", "smpl_joint_regressor_male.npz")
         with np.load(regressor_path) as data:
             j_regressor_male = data['joint_regressor']
 
@@ -203,9 +203,8 @@ def set_pose_shape():
 def add_gender():
     gender = 'male'
     print("Adding gender: " + gender)
-    path = 'C:/BlenderProj/smpl_proj'  # directory of smpl-model-20200803.blend
     objects_path = os.path.join(
-        path, "data", "smpl-model-20200803.blend", "Object")
+        proj_dir, "data", "smpl-model-20200803.blend", "Object")
     object_name = "SMPL-mesh-" + gender
     bpy.ops.wm.append(filename=object_name, directory=str(objects_path))
     # Select imported mesh
@@ -240,8 +239,7 @@ def add_texture(obj):
         node_texture = nodes.new(type="ShaderNodeTexImage")
 
     if texture not in bpy.data.images:
-        path = 'C:/BlenderProj/smpl_proj'  # path to your texture
-        texture_path = os.path.join(path, "data", texture)
+        texture_path = os.path.join(proj_dir, "data", texture)
         image = bpy.data.images.load(texture_path)
     else:
         image = bpy.data.images[texture]
@@ -380,10 +378,8 @@ def load_animation(file_path, obj):
 def test_add(file_path, fId=0):
     gender = 'male'
     print("Adding gender: " + gender)
-    path = 'C:/BlenderProj/smpl_proj'
-    print(path)
     objects_path = os.path.join(
-        path, "data", "smpl-model-20200803.blend", "Object")
+        proj_dir, "data", "smpl-model-20200803.blend", "Object")
     object_name = "SMPL-mesh-" + gender
     bpy.ops.wm.append(filename=object_name, directory=str(objects_path))
     # Select imported mesh
@@ -419,8 +415,7 @@ def test_add(file_path, fId=0):
         node_texture = nodes.new(type="ShaderNodeTexImage")
 
     if texture not in bpy.data.images:
-        path = 'C:/BlenderProj/smpl_proj'
-        texture_path = os.path.join(path, "data", texture)
+        texture_path = os.path.join(proj_dir, "data", texture)
         image = bpy.data.images.load(texture_path)
     else:
         image = bpy.data.images[texture]
@@ -484,7 +479,7 @@ def test_add(file_path, fId=0):
     return armature
 
 if __name__ == "__main__":
-    filepath ='C:/Users/admin/Desktop/real_results/92062_real_aatrans.pkl'
+    filepath ='C:/Users/hanfeng/Desktop/vis/dataset-76610.pkl'
     add_gender()
     obj = bpy.context.object
     obj = add_texture(obj)

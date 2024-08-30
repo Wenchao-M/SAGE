@@ -31,7 +31,7 @@ def load_data(filename):
     lhand_ori_all = []
     rhand_pos_all = []
     rhand_ori_all = []
-    with (open(filename) as f):
+    with open(filename) as f:
         line = f.readline()
         while line:
             tmp = line.strip().split(';')
@@ -183,4 +183,4 @@ for file_name in file_names:
 
     print(sparse_all.shape)
     torch.save(sparse_all[100:], file_name.split('.')[0] + ".pt")
-    print(f"saving {file_name.split('.')[0] + ".pt"}")
+    print(f"saving {file_name.split('.')[0] +'.pt'}")

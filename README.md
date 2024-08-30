@@ -19,8 +19,7 @@ conda create -n SAGE python=3.8
 # activate the environment
 conda activate SAGE
 # You can modify the version of PyTorch or CUDA depending on your situation.
-pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1
---extra-index-url https://download.pytorch.org/whl/cu117
+pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117
 # install other python lib
 pip install -r requirements.txt
 ```
@@ -107,6 +106,7 @@ stops recording when it is exited.
 a coordinate system that the model can process.
 - If you want to use our model in real demo, please download the weight from
 [here](https://drive.google.com/file/d/1u5taAQ_Og9Wck-8eUhiiQi1s983y3Lws/view?usp=sharing).
+- run `python inference_realdemo.py` to get the results, the results are pickle form like dataset-76610.pkl
 - After getting the results, you can visulize it in Blender using [smpl_animation_blender.py](real_demo%2Fsmpl_animation_blender.py).
   - Notice that before using it, you must agree the license of SMPL and SMPLX.
   - To use [smpl_animation_blender.py](real_demo%2Fsmpl_animation_blender.py), you need to download SMPL Blender addon from [here](https://smpl.is.tue.mpg.de/download.php)

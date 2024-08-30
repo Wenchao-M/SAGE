@@ -102,6 +102,20 @@ class TestDataset(Dataset):
         return motion, sparse, body_param, head_motion, filename
 
 
+class RealDataset(Dataset):
+    def __init__(self, all_info, filename_list):
+        self.sparse = all_info
+        self.filename_list = filename_list
+
+    def __len__(self):
+        return len(self.sparse)
+
+    def __getitem__(self, idx):
+        sparse = self.sparse[idx]
+        file_name = self.filename_list[idx]
+        return sparse, file_name
+
+
 def get_motion(motion_list):
     motions = [i["rotation_local_full_gt_list"] for i in motion_list]  # list((N,132))
     sparses = [i["hmd_position_global_full_gt_list"] for i in motion_list]  # list((N,54))
